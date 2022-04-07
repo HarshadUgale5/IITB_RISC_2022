@@ -11,12 +11,13 @@ module Instr_Fetch
 (
 	input clk,resetn,flush,
 	output wire [15:0] Instruction
+	//output reg reg_enable
 );
 	reg  [15:0] PC;
-	wire [15:0] PC_next;
 	reg [3:0]  instr_mem_addr;
 	reg  [15:0] instr;	
 	reg  [15:0] instr_mem [0:15];
+
 	initial
 		begin
 		$readmemb("program_instr.hex",instr_mem); 
@@ -27,19 +28,21 @@ module Instr_Fetch
 		if(!resetn)
 			begin
 			// if resetn = '0' clear all
-			instr <= 16'd0;
-			PC <= 16'd0;
+			instr = 16'd0;
+			PC = 16'd0;
+			//reg_enable = 0;
 			end
 		else if(flush)
-			instr <= 16'd0;
+			instr = 16'd0; 
 		else
 			begin
 			// else fetch new instr.
-			instr_mem_addr <= PC[3:0];
-			instr <= instr_mem[instr_mem_addr];
-			PC <= PC_next;
+			//reg_enable = 0;
+			instr_mem_addr = PC[3:0];
+			instr = instr_mem[instr_mem_addr];
+			PC = PC + 1'b1;
+			//reg_enable = 1;
 			end
 		end
-	assign PC_next = PC + 16'd1;
 	assign Instruction = instr;
 endmodule
