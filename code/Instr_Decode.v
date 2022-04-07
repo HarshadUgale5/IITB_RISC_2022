@@ -40,11 +40,29 @@ module Instr_Decode
 						3'b001 :  R_I_J_wire = 2'b01;
 						default : R_I_J_wire = 2'b00;
 					endcase
+					
+					case(Instr[15:12])
+						4'b0001 : case(Instr[1:0])
+								2'b00 : alu_op_wire = 5'd1; // ADD
+								2'b10 : alu_op_wire = 5'd2; // ADC
+								2'b01 : alu_op_wire = 5'd3; // ADZ
+								2'b11 : alu_op_wire = 5'd4; // ADL
+							 endcase
+						4'b0010 : case(Instr[1:0])
+                                                                2'b00 : alu_op_wire = 5'd5; // NDU
+                                                                2'b10 : alu_op_wire = 5'd6; // NDC
+                                                                2'b01 : alu_op_wire = 5'd7; // NDZ
+                                                                2'b11 : alu_op_wire = 5'd0; // Invalid
+                                                         endcase
+						4'b0011 : alu_op_wire = 5'd8; // LHI
+						default : alu_op_wire = 5'd0; // Invalid
+					endcase
 				end
+		end
 
 	assign R_I_J = R_I_J_wire;
-	alu_op,
-	I_12
+	assign alu_op = alu_op_wire;
+	assign I_12 = Instr[11:0]
 
 endmodule
 
