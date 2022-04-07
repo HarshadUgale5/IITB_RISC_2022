@@ -16,7 +16,7 @@
 //	kbitwidthReg IF_to_ID_REG #(16) (.Din(Instruction), .clk(clk), .restn(resetn), .ld(1'b1), .Qout(OutputToDecode));
 
 //	Instr_Decode instr_decode_inst(.clk(clk),.resetn(resetn),.Instr(OutputToDecode),.R_I_J(R_I_J),.alu_op(alu_op),.I_12(I_12));
-//	kbitwidthReg ID_to_RR_REG #(19) (.Din({R_I_J,alu_op,I_12}),.clk(clk),.restn(resetn),.ld(1'b1),.Qout(OutputToRR));
+//	kbitwidthReg ID_to_RR_REG #(19) (.Din({I_12,alu_op,R_I_J}),.clk(clk),.restn(resetn),.ld(1'b1),.Qout(OutputToRR));
 
 //	Register_Read register_read_inst (resetn,.....);
 //	kbitwidthReg RR_to_EX_REG #(k) (.Din(input),.clk(clk),.restn(resetn),.ld(reg_enable),.Qout(output));
