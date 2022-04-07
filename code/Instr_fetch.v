@@ -24,14 +24,14 @@ module Instr_Fetch
 
 	always @ (posedge clk or negedge resetn)
 		begin
-		if(flush)
-			instr <= 16'd0;
 		if(!resetn)
 			begin
 			// if resetn = '0' clear all
 			instr <= 16'd0;
 			PC <= 16'd0;
 			end
+		else if(flush)
+			instr <= 16'd0;
 		else
 			begin
 			// else fetch new instr.
