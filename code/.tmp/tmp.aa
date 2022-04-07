@@ -1,0 +1,139 @@
+
+$storage memory[1024]
+
+$pipe fetch_to_decode_Instr_pipe $width<16> $depth<2>
+// fetch
+// decode
+// rr
+// execute
+// ma
+// write back
+
+$module [instructionFetch] $in () $out()
+$is
+{
+	$branchblock[loop]
+	{
+		$dopipeline $depth 7 $fullrate
+		$merge $entry $loopback	
+			$phi Instr := memory[PC] $on $entry, $loopback
+		$endmerge
+		
+		fetch_to_decode_Instr_pipe := Instr
+		
+		$while 1
+	}
+}
+
+
+$module [instructionDecode] $in() $out()
+$is
+{
+	
+	$branchblock[loop]
+	{
+		$dopipeline $depth 7 $fullrate
+		$merge $entry $loopback
+			$phi Instr := fetch_to_decode_Instr_pipe $on $entry, $loopback
+		$endmerge
+		
+		$volatile ($split Instr 4 10 2) (opcode unused funcn)
+		$volatile raw_alu_op := ($concat opcode funcn)
+		$alu_op := ($excmux 
+				(raw_alu_op == _b000100) _b0000111 
+				(raw_alu_op == _b000110) _b0001011)
+				
+		
+		
+	}
+}
+
+
+------------------------------------
+rbin = 00
+rptr = 00
+ 
+rbinnext = 00 + (1 & 1) = 01
+rgraynext = 00 xor 01 = 01
+------------------------------------
+rbin = 01
+rptr = 01
+
+rbinnext = 01 + (1 & 1) = 10
+rgraynext = 01 xor 10 = 11
+------------------------------------
+rbin = 10
+rptr = 11
+ 
+rbinnext = 10 + (1 & 1) = 11
+rgraynext = 01 xor 11 = 10
+------------------------------------
+rbin = 11
+rptr = 10
+ 
+rbinnext = 11 + (1 & 1) = 00
+rgraynext = 00 xor 00 = 00
+------------------------------------
+
+
+
+
+
+
+
+reset rptr 00000 = empty
+      wptr 00000 = 
+					10000
+					01000
+					11000
+
+wptr_next = 10001
+wptr_next
+			43201
+wptr	10000 		11000 wptr_g_next
+	01111		01000
+	01110		01001
+	01101		01011
+	01100		01010
+	01011		01110
+	01010		01111
+	01001		01101
+	01000		01100
+	00111		00100
+	00110		00101
+	00101		00111
+	00100		00110
+	00011		00010
+	00010		00011
+	00001 		00001 rptr_g
+	00000 	<-rptr	00000
+
+
+
+
+wgraynext -> wptr_g_next = 11000
+rpt -> rptr_g = 00000	  and
+			   11000
+	--------------------------
+			     1
+			   			
+wgraynext -> wptr_g_next = gray(10001) = 11001
+rpt -> rptr_g = 00001	  		and
+			   		 11001
+	--------------------------------------
+			     		  1
+			     		  
+			  10p 10e-12 = 100G
+			  
+			  
+			  10*10e-12 = 
+			  
+			  
+			  
+			  
+ 
+
+
+
+
+

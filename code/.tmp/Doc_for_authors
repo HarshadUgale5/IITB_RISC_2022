@@ -1,0 +1,65 @@
+
+	What we need
+
+		6 - modules for 6 stages
+		1 module for ALU
+		1 module to read hex file and store to RAM.
+		1 module for register file
+		1 module for memory read-write
+		1 Control unit
+
+	there are 19 instructions
+		we need at least 5 bits to encode them
+	
+ 	R - 0001
+	I - 0000 - 0100 - 0101 - 1000 - 1010
+	J - 1011 - 1001 - 1111 - 1110 - 1101 - 1100 - 0011
+	
+which we want to drop - ADI ,BEQ, JLR, LHI, 1 more
+
+	lets decide alu_op(5bit) for R type instr
+				alu_op
+	ADD	00001 00	00001
+	ADC	00001 10	00010
+	ADZ	00001 01	00011
+	ADL	00001 11	00100
+	NDU	00010 00	00101
+	NDC	00010 10	00110
+	NDZ	00010 01	00111
+
+ 
+ Instr Description :
+add rc,ra,rb	[regC] = [regA] + [regB] 		Modify C and Z
+adc rc,ra,rb	[regC] = C ? [regA] + [regB] : [regC] 	Modify C and Z
+adz rc,ra,rb	[regC] = Z ? [regA] + [regB] : [regC] 	Modify C and Z
+adl rc,ra,rb	[regC] = [regA] + [regB] << 1		Modify C and Z
+adi rb,ra,imm6	[regB] = [regA] + SE[imm6]		Modify C and Z
+ndu rc,ra,rb	[regC] = [regA] !&[regB]		Modify Z only
+ndc rc,ra,rb	[regC] = C ? [regA] !& [regB] : [regC] 	Modify Z only
+ndz rc,ra,rb	[regC] = Z ? [regA] !& [regB] : [regC] 	Modify Z only
+lhi ra,imm9	[regA] = {imm9,7'd0}
+lw  ra,rb,imm6	[regA] = Mem[[regB] + imm6]]		Modify Z only
+sw  ra,rb,imm6	Mem[[regB] + imm6]]  = [regA]
+lm  ra,imm9	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
