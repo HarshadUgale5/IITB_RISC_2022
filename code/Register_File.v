@@ -22,7 +22,7 @@ module Register_File
 	genvar i;
 	
 	generate
-		for(i = 0; i < (REG_FILE_WIDTH - 1); i = i + 1)
+		for(i = 0; i < REG_FILE_WIDTH; i = i + 1)
 		begin
 		kbitwidthReg #(16) kbitwidthRegIns(.Din(Din), .clk(clk), .resetn(resetn), .ld(en[i]), .Qout(reg_read_data[i]));
 		end
@@ -32,7 +32,7 @@ module Register_File
 		read_data = {reg_read_data[reg_read_addr[5:3]],reg_read_data[reg_read_addr[2:0]]};
 
 	// write enable 
-	always @(posedge clk or negedge resetn)
+	always @(reg_write_addr,Din,resetn)
 		begin
 			if(!resetn)
 				read_data = 32'd0;
