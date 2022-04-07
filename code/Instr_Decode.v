@@ -69,6 +69,3 @@ module Instr_Decode
 	assign I_12 = I_12_reg;
 
 endmodule
-
-
-
