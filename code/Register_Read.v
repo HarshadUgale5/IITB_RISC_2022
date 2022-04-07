@@ -45,6 +45,3 @@ module Register_Read
 
 endmodule
 
-module ReadRegFile
-#(parameter )
-();
