@@ -28,7 +28,7 @@ module Register_Read
 	always @ (posedge clk or negedge resetn)
 		begin
 			if(!resetn || flush)
-					outData_reg = 'd0;
+					outData_reg = 58'd0;
 			else
 				begin
 					outData_reg[6:0] = InData[6:0];
