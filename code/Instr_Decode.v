@@ -8,14 +8,14 @@
 
 module Instr_Decode
 (
-	input clk,resetn,flush,
+	input resetn,flush,
 	input [15:0] Instr,
 	output wire [1:0]  R_I_J,
 	output wire [4:0]  alu_op,
 	output wire [11:0] I_12
 ); 
 
-	wire a,R,I,J;
+	wire R,I,J;
 	reg [1:0] R_I_J_reg;
 	reg [4:0] alu_op_reg;
 	reg [11:0] I_12_reg;
@@ -27,7 +27,7 @@ module Instr_Decode
 	// J = (I[15] and I[14]) or (I[14] and I[12]) or (!I[14] and I[13] and I[12])
 	assign J = (Instr[15] && (Instr[14] || Instr[12])) || ((!Instr[14]) && (Instr[13]) && (Instr[12]));
 
-	always @ (posedge clk or negedge resetn)
+	always @ (*)
 		begin
 			if(flush || (!resetn))
 				begin
