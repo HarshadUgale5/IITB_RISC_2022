@@ -28,9 +28,7 @@ module kbitwidthReg #(parameter WIDTH = 16)
 			if(ld)
 				Qout <= Din;
 			else
-				Qout <= {WIDTH{1'b0}};
+				Qout <= Qout;
 		end
 	end	
 endmodule
-
-
