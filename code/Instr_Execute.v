@@ -62,14 +62,14 @@ module Instr_Execute
 					end
 				5'b00101 :	// NDU
 					begin
-					Out[20:5] = !(ExInData[41+26] && ExInData[25:10]) ;
+					Out[20:5] = ~(ExInData[41:26] & ExInData[25:10]) ;
 					update_w = 1;
 					flags[1] = ~|Out[20:5];
 					end
 				5'b00110 :	// NDC
 					if(old_flags[0])
 						begin
-						Out[20:5] = !(ExInData[41:26] && ExInData[25:10]);
+						Out[20:5] = ~(ExInData[41:26] & ExInData[25:10]);
 						update_w = 1;
 						flags[1] = ~|Out[20:5];
 						end
@@ -78,7 +78,7 @@ module Instr_Execute
 				5'b00111 :	// NDZ
 					if(old_flags[1])
 						begin	
-						Out[20:5] = !(ExInData[41:26] && ExInData[25:10]);
+						Out[20:5] = ~(ExInData[41:26] & ExInData[25:10]);
 						update_w = 1;
 						flags[1] = ~|Out[20:5];
 						end
@@ -95,13 +95,15 @@ module Instr_Execute
 			end
 
 	assign update = update_w;
-	assign OutToMA = {ExInData[41:26],Out[20:5],ExInData[4:0]};
+	assign OutToMA = {ExInData[41:26],Out[20:5],ExInData[9:7],ExInData[1:0]};
 
 endmodule
 
-					
 
-
-
-
-
+// 000000000000001000000000000000010110000111 // ADD R6,1,2
+// 111111111111111100000000000000010110000111 // ADD R6,2^16-1,1
+// 000000000000001000000000000000010110001011 // ADC R6,
+// 000000000000001000000000000000010110010111 // NDU R6,1,2
+// 000000000000001000000000000000010110011011 // NDC R6,1,2
+// 000000000000001000000000000000010110011111 // NDZ R6,1,2
+// 000000000000001000000000000000010110100001 // LHI R6,1<<10
