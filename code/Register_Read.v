@@ -8,13 +8,13 @@
 
 module Register_Read
 (
-	input clk,resetn,flush,
+	input resetn,flush,
 	input [18:0] InData,
 	input [31:0] reg_Read_Data,
 	output reg [5:0] reg_read_addr,	
-	output wire [57:0]  outData 
+	output wire [41:0]  outData 
 );
-	reg [57:0] outData_reg;
+	reg [41:0] outData_reg;
 	
 	always @ (*)
 		begin
@@ -27,14 +27,13 @@ module Register_Read
 				begin
 					reg_read_addr = {InData[15:13] , InData[12:10]}; // will change for SW instr.
 					case(InData[1:0])
-						2'b11 : outData_reg[57:26] = reg_Read_Data; // R 
-						2'b10 :	outData_reg[57:26] = {reg_Read_Data[31:16],10'd0,InData[12:7]}; // I
-						2'b01 : outData_reg[57:26] = {23'd0,InData[15:7]}; // J
-						2'b00 : outData_reg[57:26] = 32'd0;
+						2'b11 : outData_reg[41:10] = reg_Read_Data; // R 
+						2'b10 :	outData_reg[41:10] = {reg_Read_Data[31:16],10'd0,InData[12:7]}; // I
+						2'b01 : outData_reg[41:10] = {23'd0,InData[15:7]}; // J
+						2'b00 : outData_reg[41:10] = 32'd0;
 					endcase
 				end
 		end
-	assign outData = outData_reg;
+	assign outData = {outData_reg[41:10],InData[18:16],InData[6:0]};
 
 endmodule
-
