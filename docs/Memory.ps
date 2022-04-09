@@ -1,9 +1,9 @@
 %!PS-Adobe-3.0 EPSF-3.0
 %%Title: Memory.ps
 %%Creator: XCircuit v3.8 rev78
-%%CreationDate: Fri Apr  8 20:20:55 2022
+%%CreationDate: Sat Apr  9 19:59:01 2022
 %%Pages: 1
-%%BoundingBox: 68 68 1276 460
+%%BoundingBox: 68 68 1282 670
 %%DocumentNeededResources: font Helvetica 
 %%EndComments
 %%BeginProlog
@@ -183,16 +183,16 @@
 %%PageOrientation: Portrait
 /pgsave save def bop
 1.0000 inchscale
-2.6000 setlinewidth 2032 608 translate
+2.6000 setlinewidth 2048 1168 translate
 
-0 1.000 -1584 592 -1584 -336 -336 -336 -336 592 4 polygon
-0 1.000 -1360 240 -1360 -192 -912 -192 -912 240 4 polygon
+0 1.000 -1584 576 -1584 -352 -336 -352 -336 576 4 polygon
+0 1.000 -1280 -512 -1280 -944 -832 -944 -832 -512 4 polygon
 0 1.000 112 592 112 -336 1360 -336 1360 592 4 polygon
-(MA) {/Helvetica cf} 2 16 0 1.000 -1184 -416 label
+(MA) {/Helvetica cf} 2 16 0 1.000 -1024 -400 label
 (WB) {/Helvetica cf} 2 16 0 1.000 336 -416 label
-1 1.000 -1296 -224 -1296 -160 2 polygon
-(clk) {/Helvetica cf} 2 16 0 1.000 -1280 -224 label
-(in load operations) {/Helvetica cf} 2 16 0 1.000 -1264 -160 label
+1 1.000 -1216 -976 -1216 -912 2 polygon
+(clk) {/Helvetica cf} 2 16 0 1.000 -1200 -976 label
+(in load operations) {/Helvetica cf} 2 16 0 1.000 -1184 -912 label
 0 1.000 -1840 592 -1840 -336 -1728 -336 -1728 592 4 polygon
 1 1.000 -1728 528 -240 528 2 polygon
 1 1.000 -1616 544 -1680 496 2 polygon
@@ -202,19 +202,18 @@
 1 1.000 -1632 448 -1664 416 2 polygon
 (3) {/Helvetica cf} 2 16 0 1.000 -1696 448 label
 (write_addr) {/Helvetica cf} 2 16 0 1.000 -1552 432 label
-1 1.000 -1744 -128 -1312 -128 2 polygon
-1 1.000 -1632 -128 -1632 256 -240 256 3 polygon
+1 1.000 -1344 48 -1344 256 -240 256 3 polygon
 1 1.000 -1728 336 -240 336 2 polygon
-1 1.000 -1056 0 -240 0 2 polygon
+1 1.000 -976 -752 -160 -752 2 polygon
 (RIJ) {/Helvetica cf} 2 16 0 1.000 -464 544 label
 (reg_write_addr) {/Helvetica cf} 2 16 0 1.000 -544 432 label
-(store_reg_data) {/Helvetica cf} 2 16 0 1.000 -720 352 label
+(store_reg_data) {/Helvetica cf} 2 16 0 1.000 -1552 352 label
 (mem_addr or reg_data) {/Helvetica cf} 2 16 0 1.000 -816 272 label
-(mem_addr) {/Helvetica cf} 2 16 0 1.000 -1552 -112 label
+(mem_addr) {/Helvetica cf} 2 16 0 1.000 -1536 -224 label
 (load_word_data_going_to_reg_pointed_by_reg_write_addr) {/Helvetica cf} 2 16 0 
-1.000 -1344 16 label
+1.000 -1264 -736 label
 0 1.000 -240 608 -240 224 -112 224 -112 608 4 polygon
-1 1.000 -256 0 160 0 2 polygon
+1 1.000 -160 0 160 0 2 polygon
 (clk) {/Helvetica cf} 2 16 0 1.000 -176 192 label
 1 1.000 -208 160 -208 240 2 polygon
 1 1.000 -112 528 160 528 2 polygon
@@ -223,9 +222,35 @@
 1 1.000 -112 256 160 256 2 polygon
 (R type) {/Helvetica cf} 2 16 0 1.000 896 512 label
 1 1.000 240 416 480 480 848 480 3 polygon
-1 1.000 256 256 624 448 848 448 3 polygon
 (reg_write_addr) {/Helvetica cf} 2 16 0 1.000 592 496 label
 (reg_write_data) {/Helvetica cf} 2 16 0 1.000 880 432 label
+1 1.000 -1328 -128 -1328 -672 -1280 -672 3 polygon
+1 1.000 -1744 -32 -1472 -32 2 polygon
+1 1.000 -1344 64 -1344 0 -1408 0 3 polygon
+1 1.000 -1328 -128 -1328 -80 -1408 -80 3 polygon
+1 1.000 -1472 0 -1472 -80 -1408 -112 -1408 32 -1472 0 5 polygon
+1 1.000 -1728 112 -1456 112 -1456 0 3 polygon
+(Load) {/Helvetica cf} 2 16 0 1.000 -1488 144 label
+(1) {/Helvetica cf} 2 16 0 1.000 -1424 -96 label
+(0) {/Helvetica cf} 2 16 0 1.000 -1440 -16 label
+1 1.000 -1856 128 -1840 128 2 polygon
+(alu_output) {/Helvetica cf} 2 16 0 1.000 -1712 -16 label
+1 1.000 -160 -752 -160 0 2 polygon
+1 1.000 -1456 112 -720 112 -720 320 -240 320 4 polygon
+(mam_addr) {/Helvetica cf} 2 16 0 1.000 -496 160 label
+(Data[R0]) {/Helvetica cf} 2 16 0 1.000 -544 352 label
+(mem_addr) {/Helvetica cf} 2 16 0 1.000 560 208 label
+(reg_data) {/Helvetica cf} 2 16 0 1.000 576 272 label
+(store) {/Helvetica cf} 2 16 0 1.000 880 256 label
+1 1.000 160 416 208 48 528 48 544 48 4 polygon
+(reg_addr) {/Helvetica cf} 2 16 0 1.000 576 64 label
+1 1.000 160 0 560 0 2 polygon
+(mem_data) {/Helvetica cf} 2 16 0 1.000 640 -16 label
+1 1.000 192 272 480 432 848 432 3 polygon
+(load) {/Helvetica cf} 2 16 0 1.000 928 48 label
+1 1.000 160 336 224 272 560 272 3 polygon
+1 1.000 176 256 272 224 544 224 3 polygon
+1 1.000 -256 336 -128 336 2 polygon
 pgsave restore showpage
 
 %%Trailer

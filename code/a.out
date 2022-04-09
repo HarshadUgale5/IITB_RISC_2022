@@ -4,50 +4,49 @@
 :vpi_module "system";
 :vpi_module "v2005_math";
 :vpi_module "va_math";
-S_0x10c4a80 .scope module, "Write_Back" "Write_Back" 2 9;
+S_0x145dbb0 .scope module, "Memory" "Memory" 2 10;
  .timescale 0 0;
-v0x10b3690_0 .net "WBInData", 36 0, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; 0 drivers
-v0x10f6ae0_0 .var "WBOut_wire", 15 0;
-v0x10f6b80_0 .net "WB_OUT", 15 0, v0x10f6ae0_0; 1 drivers
-v0x10f6c20_0 .net "reg_write_addr", 2 0, v0x10f6cd0_0; 1 drivers
-v0x10f6cd0_0 .var "reg_write_addr_wire", 2 0;
-v0x10f6d70_0 .net "resetn", 0 0, C4<z>; 0 drivers
-E_0x10b2e90 .event edge, v0x10b3690_0, v0x10f6d70_0;
-    .scope S_0x10c4a80;
+v0x1481b60 .array "Memory", 15 0, 15 0;
+v0x145df00_0 .net "clk", 0 0, C4<z>; 0 drivers
+v0x1490320_0 .net "mem_addr", 15 0, C4<zzzzzzzzzzzzzzzz>; 0 drivers
+v0x14903c0_0 .net "mem_physical_addr", 3 0, L_0x1490820; 1 drivers
+v0x1490470_0 .net "read_data", 15 0, v0x1490510_0; 1 drivers
+v0x1490510_0 .var "read_data_reg", 15 0;
+v0x14905f0_0 .net "resetn", 0 0, C4<z>; 0 drivers
+v0x1490690_0 .net "rwbar", 0 0, C4<z>; 0 drivers
+v0x1490780_0 .net "write_data", 15 0, C4<zzzzzzzzzzzzzzzz>; 0 drivers
+E_0x144bef0/0 .event negedge, v0x14905f0_0;
+E_0x144bef0/1 .event posedge, v0x145df00_0;
+E_0x144bef0 .event/or E_0x144bef0/0, E_0x144bef0/1;
+L_0x1490820 .part C4<zzzzzzzzzzzzzzzz>, 0, 4;
+    .scope S_0x145dbb0;
 T_0 ;
-    %wait E_0x10b2e90;
-    %load/v 8, v0x10f6d70_0, 1;
+    %wait E_0x144bef0;
+    %load/v 8, v0x14905f0_0, 1;
     %inv 8, 1;
     %jmp/0xz  T_0.0, 8;
-    %set/v v0x10f6ae0_0, 0, 16;
-    %set/v v0x10f6cd0_0, 0, 3;
+    %set/v v0x1490510_0, 0, 16;
     %jmp T_0.1;
 T_0.0 ;
-    %ix/load 1, 2, 0;
-    %mov 4, 0, 1;
-    %jmp/1 T_0.2, 4;
-    %load/x1p 8, v0x10b3690_0, 3;
+    %load/v 8, v0x1490690_0, 1;
+    %jmp/0xz  T_0.2, 8;
+    %ix/getv 3, v0x14903c0_0;
+    %load/av 8, v0x1481b60, 16;
+    %set/v v0x1490510_0, 8, 16;
     %jmp T_0.3;
 T_0.2 ;
-    %mov 8, 2, 3;
+    %load/v 8, v0x1490780_0, 16;
+    %ix/getv 3, v0x14903c0_0;
+   %jmp/1 t_0, 4;
+   %ix/load 1, 0, 0;
+   %set/av v0x1481b60, 8, 16;
+t_0 ;
 T_0.3 ;
-; Save base=8 wid=3 in lookaside.
-    %set/v v0x10f6cd0_0, 8, 3;
-    %ix/load 1, 5, 0;
-    %mov 4, 0, 1;
-    %jmp/1 T_0.4, 4;
-    %load/x1p 8, v0x10b3690_0, 16;
-    %jmp T_0.5;
-T_0.4 ;
-    %mov 8, 2, 16;
-T_0.5 ;
-; Save base=8 wid=16 in lookaside.
-    %set/v v0x10f6ae0_0, 8, 16;
 T_0.1 ;
     %jmp T_0;
-    .thread T_0, $push;
+    .thread T_0;
 # The file index is used to find the file name in the following table.
 :file_names 3;
     "N/A";
     "<interactive>";
-    "Write_Back.v";
+    "Memory.v";
