@@ -37,3 +37,4 @@ module Register_Read
 	assign outData = {outData_reg[41:10],InData[18:16],InData[6:0]};
 
 endmodule
+
