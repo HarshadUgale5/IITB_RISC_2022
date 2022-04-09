@@ -50,8 +50,8 @@ wire [15:0] WB_OUT;
 wire [2:0] reg_write_addr;
 wire [31:0] read_data;	
 wire update;
-wire [36:0] OutToMA;
-wire [36:0] OutToWB,OutToWB2;
+wire [37:0] OutToMA;
+wire [37:0] OutToWB,OutToWB2;
 
 	//Call for Instruction Fetch Module
 	Instr_Fetch instr_fetch_inst (.clk(clk), .resetn(resetn), .Instruction(Instruction));
