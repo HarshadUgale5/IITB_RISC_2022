@@ -12,7 +12,6 @@ module Write_Back
 	input [37:0] WBInData,
 	output wire [15:0] WB_OUT,
 	output wire [2:0] reg_write_addr,
-	output wire rwbar
 );
 
 	reg [15:0] WBOut_wire;
@@ -23,7 +22,8 @@ module Write_Back
 			WBOut_wire = 16'd0;
 			reg_write_addr_wire = 3'd0;
 			end
-		else
+		else if(WBInData[0])	// load
+			
 			begin
 			reg_write_addr_wire = WBInData[4:2];
 			WBOut_wire = WBInData[20:5];
