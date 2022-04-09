@@ -51,8 +51,7 @@ wire [2:0] reg_write_addr;
 wire [31:0] read_data;	
 wire update;
 wire [36:0] OutToMA;
-wire [36:0] OutToWB;
-wire [18:0] OutToRR;
+wire [36:0] OutToWB,OutToWB2;
 
 	//Call for Instruction Fetch Module
 	Instr_Fetch instr_fetch_inst (.clk(clk), .resetn(resetn), .Instruction(Instruction));
@@ -83,10 +82,10 @@ wire [18:0] OutToRR;
 	//Memory_Access memory_access_inst (resetn,....);
 
 	//Call for register in between Memory Access and Write Back
-	kbitwidthReg #(37) MA_to_WB_REG (.Din(OutToWB),.clk(clk),.resetn(resetn),.ld(1'b1),.Qout(OutToRR));
+	kbitwidthReg #(37) MA_to_WB_REG (.Din(OutToWB),.clk(clk),.resetn(resetn),.ld(1'b1),.Qout(OutToWB2));
 	
 	//Call for Write Back Module
-	Write_Back write_back_inst (.resetn(resetn),.WBInData(OutToWB),.reg_write_addr(reg_write_addr),.WB_OUT(WB_OUT));
+	Write_Back write_back_inst (.resetn(resetn),.WBInData(OutToWB2),.reg_write_addr(reg_write_addr),.WB_OUT(WB_OUT));
 
 
 
