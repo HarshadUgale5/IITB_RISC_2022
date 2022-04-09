@@ -9,9 +9,10 @@
 module Write_Back
 (
 	input resetn,
-	input [36:0] WBInData,
+	input [37:0] WBInData,
 	output wire [15:0] WB_OUT,
-	output wire [2:0] reg_write_addr
+	output wire [2:0] reg_write_addr,
+	output wire rwbar
 );
 
 	reg [15:0] WBOut_wire;

@@ -8,9 +8,9 @@
 module Instr_Execute
 (
 	input clk,resetn,flush,
-	input [42:0] ExInData,
+	input [41:0] ExInData,
 	output wire update,
-	output wire [36:0] OutToMA
+	output wire [37:0] OutToMA
 );
 	//	flags[0] -> C and flags[1] -> Z
 	reg [1:0] flags;
@@ -104,6 +104,7 @@ module Instr_Execute
 			end
 
 	assign update = update_w;
+//				16		16	3		2		1
 	assign OutToMA = {ExInData[41:26],Out[20:5],ExInData[9:7],ExInData[1:0],load_from_mem};
 
 endmodule
