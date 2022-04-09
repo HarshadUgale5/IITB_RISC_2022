@@ -23,24 +23,22 @@ module Register_File
 	
 	generate
 		for(i = 0; i < (REG_FILE_WIDTH); i = i + 1)
-		begin
+		begin : genreg
 		kbitwidthReg #(16) kbitwidthRegIns(.Din(Din), .clk(clk), .resetn(resetn), .ld(en[i]), .Qout(reg_read_data[i]));
 		end
 	endgenerate
 	// read data
-	always @(clk,reg_read_addr)
+	always @(clk,reg_read_addr,resetn)
+		if(!resetn)
+				read_data = 32'd0;
+		else
 		read_data = {reg_read_data[reg_read_addr[5:3]],reg_read_data[reg_read_addr[2:0]]};
 
 	// write enable 
 	always @(reg_write_addr,Din,resetn)
-		begin
-			if(!resetn)
-				read_data = 32'd0;
-			else
 			begin
 				en = 8'd0;
 				en[reg_write_addr] = 1;	
 			end
-		end
 endmodule
 
