@@ -46,5 +46,3 @@ module Instr_Fetch
 		end
 	assign Instruction = instr;
 endmodule
-
-
